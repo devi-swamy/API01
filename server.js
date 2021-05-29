@@ -1,13 +1,15 @@
 //Include Express JS
 const express = require("express");
+//import Root route handler
+const root = require("./routes/root");
 
 //Let create a new express Instance like object
 const app = express();
-//create a GET REQUEST HANDLER
-
-app.get("/", (req, res) => {
-  res.json("Hello devi");
-});
+const port = 3000;
+//middlewares
+app.use(express.json());
+//Route a handler
+app.use("/", root);
 
 app.get("/:name", (req, res) => {
   console.log(req.query);
@@ -15,7 +17,7 @@ app.get("/:name", (req, res) => {
 });
 
 //listen it in a particular port
-const port = 3000;
+
 app.listen(port, () => {
   console.log("server started with port 3000");
 });
